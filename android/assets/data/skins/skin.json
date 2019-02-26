@@ -1,0 +1,62 @@
+{
+  com.badlogic.gdx.graphics.g2d.BitmapFont: {
+    default-font: {
+      file: fonts/FlappyBird.fnt
+    }
+    shadowed-font: {
+      file: fonts/FlappyBirdShadowed.fnt
+    }
+  }
+  com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+    playButton: {
+      imageUp: playButton.up
+      imageDown: playButton.down
+      pressedOffsetY: -2
+    }
+    settingsButton: {
+      imageUp: settingsButton.up
+      imageDown: settingsButton.down
+      pressedOffsetY: -2
+    }
+    menuButton: {
+      imageUp: menuButton
+      pressedOffsetY: -1
+    }
+    pauseButton: {
+      imageUp: pauseButton
+      pressedOffsetY: -1
+    }
+    resumeButton: {
+      imageUp: resumeButton
+      pressedOffsetY: -1
+    }
+    playInvitationButton: {
+      imageUp: playInvitation
+      pressedOffsetY: -1
+    }
+  }
+  com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+    default: {
+      font: default-font
+    }
+    shadowed: {
+      font: shadowed-font
+    }
+  }
+  com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {
+    default: {
+      label: default
+    }
+    shadowed: {
+      label: shadowed
+    }
+  }
+  com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
+    default: {
+      checkboxOn: switch.1
+      checkboxOff: switch.0
+      font: default-font
+      pressedOffsetY: -2
+    }
+  }
+}
