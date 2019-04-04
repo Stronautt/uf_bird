@@ -25,7 +25,9 @@ public class SettingsView extends View<SettingsController, SettingsModel> {
         CheckBox enableMusicCheckBox = model.getEnableMusicCheckBox();
         enableMusicCheckBox.getLabelCell().padLeft(20);
         enableMusicCheckBox.getLabel().setFontScale(0.29F);
-        innerTable.add(enableMusicCheckBox).row();
+        innerTable.add(enableMusicCheckBox).padTop(-5).row();
+
+        innerTable.add(model.getDayTimeSelectBox()).row();
 
         innerTable.add(model.getMenuButton());
         innerTable.setBackground(new NinePatchDrawable(model.getBoard()));

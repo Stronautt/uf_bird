@@ -15,7 +15,7 @@ public class GameView extends View<GameController, GameModel> {
         model.uiTable.setFillParent(true);
 
         model.invitationTable.add(model.getGetReadyLabel()).padTop(20).row();
-        model.invitationTable.add(model.getPlayInvitationButton()).padTop(15).grow();
+        model.invitationTable.add(model.getPlayInvitationButton()).padTop(20).grow();
 
         if (sr.kDrawDebug) {
             model.uiTable.add(model.getFpsLabel()).width(Value.percentWidth(.333F, model.uiTable)).expandY().top().left();
@@ -53,6 +53,7 @@ public class GameView extends View<GameController, GameModel> {
         // Draw background
         for (int i = 0; i <= model.viewport.getWorldWidth() / model.getBackground().getWidth(); i++)
             sr.spriteBatch.draw(model.getBackground(), model.camera.position.x - model.viewport.getWorldWidth() / 2.0F + i * model.getBackground().getWidth(), -model.viewport.getWorldHeight() / 2.0F);
+        sr.spriteBatch.draw(model.getLightSource(), model.camera.position.x - model.viewport.getWorldWidth() / 2.0F + model.getLightSource().getX(), model.getLightSource().getY());
 
         sr.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         model.getTubeGates().draw(delta);

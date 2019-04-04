@@ -32,7 +32,7 @@ public class MenuModel extends Model<MenuController> {
 
         Skin gameTexturesSkin = sr.assetManager.get(sr.kDefaultSkin, Skin.class);
 
-        background = gameTexturesSkin.getSprite("backGround.day");
+        background = gameTexturesSkin.getSprite("backGround." + sr.settings.dayTime());
         background.getTexture().getTextureData().prepare();
 
         Pixmap backgroundPixMap = background.getTexture().getTextureData().consumePixmap();

@@ -29,6 +29,27 @@ public class Settings {
         preferences.putBoolean("musicEnabled", val).flush();
     }
 
+    public String dayTimeRaw() {
+        return preferences.getString("dayTime", "day");
+    }
+
+    public String dayTime() {
+        String dayTime = dayTimeRaw();
+        if (dayTime.equals("dynamic")) {
+            if (Math.random() < 0.5) {
+                return "day";
+            } else {
+                return "night";
+            }
+        } else {
+            return dayTime;
+        }
+    }
+
+    public void dayTime(String dayTime) {
+        preferences.putString("dayTime", dayTime.toLowerCase()).flush();
+    }
+
     public String gameTexturesPack() {
         return preferences.getString("texturesPack", kTexturesPath + "defaultTextures.atlas");
     }

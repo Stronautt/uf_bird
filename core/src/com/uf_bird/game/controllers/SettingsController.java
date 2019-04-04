@@ -4,6 +4,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.uf_bird.game.models.SettingsModel;
 import com.uf_bird.game.utilities.SharedResources;
@@ -32,6 +33,15 @@ public class SettingsController extends Controller<SettingsModel, SettingsView> 
             public void changed(ChangeEvent event, Actor actor) {
                 sr.musicMixer.stopAll(Music.class);
                 sr.settings.musicEnabled(((CheckBox) actor).isChecked());
+            }
+        };
+    }
+
+    public ChangeListener dayTimeSelectBoxTriggered() {
+        return new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                sr.settings.dayTime(((SelectBox) actor).getSelected().toString());
+
             }
         };
     }

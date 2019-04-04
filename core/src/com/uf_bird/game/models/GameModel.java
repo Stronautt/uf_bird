@@ -27,10 +27,13 @@ public class GameModel extends Model<GameController> {
     public final OrthographicCamera camera = new OrthographicCamera();
     public final ExtendViewport viewport = new ExtendViewport(kViewportWidth, kViewportHeight, camera);
     public final GameStage uiStage = new GameStage(sr, new ExtendViewport(kViewportWidth, kViewportHeight), this);
+
     public final Table invitationTable = new Table();
     public final Table uiTable = new Table();
 
     private final Sprite background;
+    private final Sprite lightSource;
+    private final float lightSourceXPercent;
     private final Bird bird;
     private final TubeGates tubeGates;
     private final Ground ground;
@@ -49,8 +52,11 @@ public class GameModel extends Model<GameController> {
 
         Skin gameTexturesSkin = sr.assetManager.get(sr.kDefaultSkin, Skin.class);
 
-        background = gameTexturesSkin.getSprite("backGround.day");
+        background = gameTexturesSkin.getSprite("backGround." + sr.settings.dayTime());
         background.getTexture().getTextureData().prepare();
+
+        lightSource = gameTexturesSkin.getSprite("lightSource." + sr.settings.dayTime());
+        lightSourceXPercent = (float) Math.random();
 
         Pixmap backgroundPixMap = background.getTexture().getTextureData().consumePixmap();
         kBgColor = new Color(backgroundPixMap.getPixel(background.getRegionX(), background.getRegionY()));
@@ -62,7 +68,7 @@ public class GameModel extends Model<GameController> {
         tubeGates = new TubeGates(sr, gameController, viewport.getWorldWidth(), 0);
         tubeGates.setGroundLevel(Ground.kHeight);
 
-        ground = new Ground(sr, gameController, -viewport.getWorldWidth() / 2.0F, 0);
+        ground = new Ground(sr, gameController);
 
         fpsLabel = new Label("0", sr.assetManager.get(sr.kDefaultSkin, Skin.class));
         fpsLabel.setFontScale(0.15F);
@@ -92,8 +98,9 @@ public class GameModel extends Model<GameController> {
     public void worldChanged() {
         tubeGates.setWorldParams(viewport.getWorldWidth(), viewport.getWorldHeight());
         ground.setWorldWidth(viewport.getWorldWidth());
-        ground.setPosition(ground.getX(), -viewport.getWorldHeight() / 2.0F + Ground.kHeight);
+        ground.setPosition(-viewport.getWorldWidth() / 2.0F, -viewport.getWorldHeight() / 2.0F + Ground.kHeight);
         camera.position.x = viewport.getWorldWidth() * (1 - 2 * kBirdXOffset) / 2 + bird.getX();
+        lightSource.setPosition(lightSourceXPercent * (viewport.getWorldWidth() - lightSource.getWidth()), viewport.getWorldHeight() / 2.0F - lightSource.getHeight() - 10);
     }
 
     public boolean isPaused() {
@@ -143,6 +150,10 @@ public class GameModel extends Model<GameController> {
 
     public Sprite getBackground() {
         return background;
+    }
+
+    public Sprite getLightSource() {
+        return lightSource;
     }
 
     public Bird getBird() {

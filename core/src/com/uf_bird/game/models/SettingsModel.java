@@ -7,7 +7,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.uf_bird.game.controllers.SettingsController;
 import com.uf_bird.game.utilities.SharedResources;
@@ -22,6 +26,7 @@ public class SettingsModel extends Model<SettingsController> {
     private final NinePatch board;
     private final CheckBox enableSoundCheckBox;
     private final CheckBox enableMusicCheckBox;
+    private final Table dayTimeSelectBox;
     private final ImageButton menuButton;
 
     public SettingsModel(SharedResources sr, final SettingsController settingsController) {
@@ -33,7 +38,7 @@ public class SettingsModel extends Model<SettingsController> {
 
         Skin gameTexturesSkin = sr.assetManager.get(sr.kDefaultSkin, Skin.class);
 
-        background = gameTexturesSkin.getSprite("backGround.day");
+        background = gameTexturesSkin.getSprite("backGround." + sr.settings.dayTime());
         background.getTexture().getTextureData().prepare();
 
         Pixmap backgroundPixMap = background.getTexture().getTextureData().consumePixmap();
@@ -49,6 +54,21 @@ public class SettingsModel extends Model<SettingsController> {
         enableMusicCheckBox = new CheckBox("Music", gameTexturesSkin);
         enableMusicCheckBox.setChecked(sr.settings.musicEnabled());
         enableMusicCheckBox.addListener(controller.enableMusicCheckBoxTriggered());
+
+        dayTimeSelectBox = new Table();
+        SelectBox<String> dayTimeSelect = new SelectBox<String>(gameTexturesSkin);
+        dayTimeSelect.getStyle().font.getData().setScale(0.2F);
+        dayTimeSelect.setAlignment(Align.center);
+        dayTimeSelect.getList().setAlignment(Align.center);
+        dayTimeSelect.setItems("Day", "Night", "Dynamic");
+        dayTimeSelect.setSelected(sr.settings.dayTimeRaw().substring(0, 1).toUpperCase() + sr.settings.dayTimeRaw().substring(1));
+        dayTimeSelect.getStyle().listStyle.selection.setRightWidth(3);
+        dayTimeSelect.getStyle().listStyle.selection.setLeftWidth(3);
+        dayTimeSelect.addListener(controller.dayTimeSelectBoxTriggered());
+        Label dayTimeLabel = new Label("Day Time", gameTexturesSkin);
+        dayTimeLabel.setFontScale(0.29F);
+        dayTimeSelectBox.add(dayTimeLabel).padRight(10);
+        dayTimeSelectBox.add(dayTimeSelect);
 
         menuButton = new ImageButton(gameTexturesSkin, "menuButton");
         menuButton.addListener(controller.menuButtonPressed());
@@ -68,6 +88,10 @@ public class SettingsModel extends Model<SettingsController> {
 
     public CheckBox getEnableMusicCheckBox() {
         return enableMusicCheckBox;
+    }
+
+    public Table getDayTimeSelectBox() {
+        return dayTimeSelectBox;
     }
 
     public ImageButton getMenuButton() {

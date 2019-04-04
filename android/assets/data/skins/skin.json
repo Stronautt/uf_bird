@@ -7,6 +7,26 @@
       file: fonts/FlappyBirdShadowed.fnt
     }
   }
+  com.badlogic.gdx.graphics.Color: {
+    RGBA_0_0_0_255: {
+      r: 0.9137255
+      g: 0.38039216
+      b: 0
+      a: 1
+    }
+    RGBA_220_217_142_255: {
+      r: 0.8156863
+      g: 0.6666667
+      b: 0.22352941
+      a: 1
+    }
+    RGBA_255_255_255_255: {
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    }
+  }
   com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
     playButton: {
       imageUp: playButton.up
@@ -57,6 +77,28 @@
       checkboxOff: switch.0
       font: default-font
       pressedOffsetY: -2
+    }
+  }
+  com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+    default: {
+      font: default-font
+      fontColorSelected: RGBA_220_217_142_255
+      fontColorUnselected: RGBA_255_255_255_255
+      selection: board2
+    }
+  }
+  com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+    default: {
+      background: board2
+    }
+  }
+  com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
+    default: {
+      font: default-font
+      fontColor: RGBA_255_255_255_255
+      background: board2
+      scrollStyle: default
+      listStyle: default
     }
   }
 }

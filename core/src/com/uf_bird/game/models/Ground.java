@@ -16,12 +16,11 @@ public class Ground extends Model implements Entity {
 
     private int count;
 
-    public Ground(SharedResources sr, Controller<?, ?> controller, float x, float y) {
+    public Ground(SharedResources sr, Controller<?, ?> controller) {
         super(sr, controller);
         Skin gameTexturesSkin = sr.assetManager.get(sr.kDefaultSkin, Skin.class);
         ground = gameTexturesSkin.get("ground", NinePatch.class);
         boundsArray = new Polygon[]{bounds};
-        setPosition(x, y);
     }
 
     public void setWorldWidth(float worldWidth) {
